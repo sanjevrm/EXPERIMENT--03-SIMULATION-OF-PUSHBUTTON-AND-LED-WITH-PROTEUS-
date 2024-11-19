@@ -1,7 +1,7 @@
 # EXPERIMENT--02-SIMULATION-OF-PUSHBUTTON-AND-LED INTERFACE WITH ARM CONTROLLER AND PROTEUS 
 ### NAME : SANJEV R M
 ### REG NO : 212223040186
-### DATE : 16.09.2024
+### DATE : 16-09-2024
 ## Aim: To Interface a Digital output (LED) and Digital input (Pushbutton) to ARM development board , and simulate it in Proteus 
 ## Components required: STM32 CUBE IDE, Proteus 8 simulator .
 ## Theory 
@@ -72,38 +72,44 @@ We are now at the last part of step by step guide on how to simulate STM32 proje
 
 ![image](https://user-images.githubusercontent.com/36288975/233856904-99eb708a-c907-4595-9025-c9dbd89b8879.png)
 
-
 ## STM 32 CUBE PROGRAM :
-
 ```
-
 #include "main.h"
 #include <stdbool.h>
 void push_button();
 bool button_status;
+
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+
 int main(void)
 {
+
   HAL_Init();
+
   SystemClock_Config();
+
   MX_GPIO_Init();
+
   while (1)
   {
+
 	  push_button();
   }
+
 }
 void push_button()
 {
-	button_status = HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13);
+	button_status=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13);
 	if(button_status==0)
 	{
 		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_SET);
 	}
 	else
 	{
-			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);
-		}
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);
+
+	}
 }
 
 void SystemClock_Config(void)
@@ -113,6 +119,7 @@ void SystemClock_Config(void)
 
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
+
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
@@ -121,6 +128,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
@@ -158,7 +166,6 @@ static void MX_GPIO_Init(void)
 
 void Error_Handler(void)
 {
-  
   __disable_irq();
   while (1)
   {
@@ -166,33 +173,29 @@ void Error_Handler(void)
 }
 
 #ifdef  USE_FULL_ASSERT
+
 void assert_failed(uint8_t *file, uint32_t line)
 {
-     printf("Wrong parameters value: file %s on line %d\r\n", file, line)
+  
 }
+#endif
+
 ```
 
 
 ## Output screen shots of proteus  :
-
-![led not glow exp 02](https://github.com/user-attachments/assets/e0e0d1e6-a3e8-47d3-8c4f-1110a1405391)
-
-![led glow exp 02](https://github.com/user-attachments/assets/5df947eb-73e6-4b6e-ba52-d39653856b36)
-
-
-
+### OFF STATE:
+![image](https://github.com/user-attachments/assets/7f380ccd-5059-4ac5-8573-0ae8a3968223)
+### ON STATE:
+![image](https://github.com/user-attachments/assets/f3e2e21e-f1f1-47fc-bee7-ed1f602845cc)
 
 
 
 ## Proteus layout(Add pdf screen shot of circuit here)
-
- ![exp 2 layout led](https://github.com/user-attachments/assets/e82ad181-343b-4119-a1fd-8f3a0678b727)
-
-
  
+ ![image](https://github.com/user-attachments/assets/15742efa-5845-4126-b137-c84b23ab363c)
+
  
  
 ## Result :
 Interfacing a digital output and digital input  with ARM microcontroller are simulated in proteus and the results are verified.
-
-
